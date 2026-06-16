@@ -1,0 +1,15 @@
+{
+	"name": "one-r-shortener",
+	"main": "src/index.js",
+	"compatibility_date": "2026-06-16",
+	"vars": {
+		"SHORT_DOMAIN": "1r.pw",
+		"ALLOWED_ORIGIN": "*"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "LINKS",
+			"id": "7ca9314663eb428baa352e3b4f74e09d"
+		}
+	]
+}
