@@ -5,13 +5,6 @@
         <el-card>
           <div slot="header">
             <svg-icon class="gayhub" icon-class="github" style="float:left" @click="goToProject"/>
-            <svg-icon class="dianbao" icon-class="telegram" style="float:left;margin-left: 10px"
-                      @click="gotoTgChannel"/>
-            <svg-icon class="bilibili" icon-class="bilibili" style="float:right;margin-left:10px"
-                      @click="gotoBiliBili"/>
-            <svg-icon class="youguan" icon-class="youtube" style="float:right;margin-left:10px" @click="gotoYouTuBe"/>
-            <svg-icon class="channel" icon-class="telegram" style="float:right;margin-left: 10px"
-                      @click="gotoTgChannel"/>
             <div style="text-align:center;font-size:15px">订 阅 转 换</div>
           </div>
           <el-container>
@@ -434,9 +427,6 @@ const shortUrlBackend = process.env.VUE_APP_MYURLS_DEFAULT_BACKEND + '/short'
 const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/sub.php'
 const basicVideo = process.env.VUE_APP_BASIC_VIDEO
 const advancedVideo = process.env.VUE_APP_ADVANCED_VIDEO
-const tgBotLink = process.env.VUE_APP_BOT_LINK
-const yglink = process.env.VUE_APP_YOUTUBE_LINK
-const bzlink = process.env.VUE_APP_BILIBILI_LINK
 const downld = 'http://' + window.location.host + '/download.html'
 export default {
   data() {
@@ -930,7 +920,6 @@ export default {
       uploadFilter: "",
       uploadScript: "",
       uploadConfig: "",
-      myBot: tgBotLink,
       filterConfig: filterConfigSample,
       scriptConfig: scriptConfigSample,
       sampleConfig: remoteConfigSample
@@ -941,7 +930,6 @@ export default {
     this.isPC = this.$getOS().isPc;
   },
   mounted() {
-    this.tanchuang();
     this.form.clientType = "clash";
     this.getBackendVersion();
     this.anhei();
@@ -1004,52 +992,20 @@ export default {
         window.localStorage.setItem('localTheme', 'light-mode');
       }
     },
-    tanchuang() {
-      this.$alert(`<div style="text-align:center;font-size:15px"><strong><span style="font-size:20px">本站官方TG交流群：</span><span><a href="https://t.me/feiyangdigital" target="_blank" style="color:red;font-size:20px;text-decoration:none">点击加入</a></span></strong></br><strong><span style="font-size:20px">IEPL高端机场（<span style="color:blue">原生支持奈飞非自制剧、Disney Plus、HBO等各种流媒体，支持Chat-GPT和ISP住宅IP助力Tiktok等跨境贸易使用</span>）：</span><span><a href="https://www.mcwy.org" style="color:red;font-size:20px;text-decoration:none">点击注册</a></span></strong></br><strong><span style="font-size:20px">奈飞、ChatGPT合租（<span style="color:blue">优惠码：feiyang</span>）：</span><span><a href="https://hezu.v1.mk/" style="color:red;font-size:20px;text-decoration:none">点击上车</a></span></strong></br><strong><span style="font-size:20px">115蓝光4K原盘内部资源群：</span><span><a href="https://readme.115vip.shop/" target="_blank" style="color:red;font-size:20px;text-decoration:none">点击查看</a></span></strong></br>本站服务器赞助机场-牧场物语，是一家拥有BGP中继+IEPL企业级内网专线的高端机场，适合各个价位要求的用户，<strong>采用最新Vless Encryption量子加密协议，在众多机场不稳定的今天，依旧生龙活虎，Vless Encryption量子加密协议+企业级跨境专线，是当下恶劣环境的最优解</strong>，牧场物语采用最新的奈飞非自制剧解决方案，出口随机更换IP，确保尽可能的每个用户可以用上独立IP，以此来稳定解决奈飞非自制剧的封锁，并推出7*24小时奈飞非自制剧节点自动检测系统，用户再也不用自己手动一个个的乱试节点了，目前牧场的新加坡，台湾等节区域点均可做到24H稳定非自制剧观看，支持Chat-GPT和ISP住宅IP助力Tiktok等跨境贸易使用！</br></div>`, '信息面板', {
-        confirmButtonText: '确定',
-        dangerouslyUseHTMLString: true,
-        customClass: 'msgbox'
-      });
-    },
     onCopy() {
       this.$message.success("已复制");
     },
     goToProject() {
       window.open(project);
     },
-    gotoTgChannel() {
-      window.open(tgBotLink);
-    },
-    gotoBiliBili() {
-      window.open(bzlink);
-    },
-    gotoYouTuBe() {
-      window.open(yglink);
-    },
     toolsDown() {
       window.open(downld);
     },
     gotoBasicVideo() {
-      this.$alert("别忘了关注友善的肥羊哦！", {
-        type: "warning",
-        confirmButtonText: '确定',
-        customClass: 'msgbox',
-        showClose: false,
-      })
-          .then(() => {
-            window.open(basicVideo);
-          });
+      window.open(basicVideo);
     },
     gotoAdvancedVideo() {
-      this.$alert("别忘了关注友善的肥羊哦！", {
-        type: "warning",
-        confirmButtonText: '确定',
-        customClass: 'msgbox',
-        showClose: false,
-      })
-          .then(() => {
-            window.open(advancedVideo);
-          });
+      window.open(advancedVideo);
     },
     makeUrl() {
       if (this.form.sourceSubUrl === "" || this.form.clientType === "") {
@@ -1126,7 +1082,7 @@ export default {
           "&scv=" +
           this.form.scv.toString() +
           "&fdn=" +
-          this.form.fdn.toString();    
+          this.form.fdn.toString();
       if (this.form.clientType.includes("surge")) {
         if (this.form.tpl.surge.doh === true) {
           this.customSubUrl += "&surge.doh=true";
