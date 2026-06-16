@@ -468,10 +468,12 @@ export default {
           "sub.cm": "https://sub.cm/short",
         },
         customBackend: {
-          "肥羊增强型后端【vless reality+anytls】": "https://api.v1.mk",
-          "肥羊备用后端【vless reality+anytls】": "https://url.v1.mk",
+          "自建后端": "https://subconverter.sakuya.me",
+          "备用后端 1": "https://api.v1.mk",
+          "备用后端 2": "https://url.v1.mk",
         },
         backendOptions: [
+          {value: "https://subconverter.sakuya.me"},
           {value: "https://api.v1.mk"},
           {value: "https://url.v1.mk"},
         ],
@@ -873,7 +875,7 @@ export default {
       form: {
         sourceSubUrl: "",
         clientType: "",
-        customBackend: this.getUrlParam() == "" ? "https://api.v1.mk" : this.getUrlParam(),
+        customBackend: this.getUrlParam() == "" ? defaultBackend : this.getUrlParam(),
         shortType: "https://v1.mk/short",
         remoteConfig: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini",
         excludeRemarks: "",
@@ -1361,9 +1363,7 @@ export default {
           .then(res => {
             this.backendVersion = res.data.replace(/backend\n$/gm, "");
             this.backendVersion = this.backendVersion.replace("subconverter", "SubConverter");
-            let a = this.form.customBackend.indexOf("api.v1.mk") !== -1 || this.form.customBackend.indexOf("url.v1.mk") !== -1;
-            let b = this.form.customBackend.indexOf("127.0.0.1") !== -1;
-            a ? this.$message.success(`${this.backendVersion}` + "肥羊负载均衡增强版后端，已屏蔽免费节点池（会返回403），额外支持Vless Reality/Encryption/xhttp+AnyTLS+TUIC+Mieru订阅转换") : b ? this.$message.success(`${this.backendVersion}` + "本地局域网自建版后端") : this.$message.success(`${this.backendVersion}` + "官方原版后端不支持vless/hysteria/anytls等订阅转换");
+            this.$message.success(`${this.backendVersion}` + "后端可用");
           })
           .catch(() => {
             this.$message.error("请求SubConverter版本号返回数据失败，该后端不可用！");
